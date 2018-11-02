@@ -16,18 +16,18 @@ function generateStringHTML(items) {
             <button class="shopping-item-delete">
                 <span class="button-label">delete</span>
             </button>
-        </div>
+        </div>input
     </li>`
     });
 };
 
 function renderShoppingList() {
-    // this function will be responsible for rendering the shopping list in
-    // the DOM
+    // this fuinpution will be responsible for rendering the shopping list in
+    // the DOMinput
     //
     
     const html = generateStringHTML(STORE);
-    ('.shopping-list').html(html);
+    $('.shopping-list').html(html);
 
 
 //For each item in STORE, generate a string representing an <li> with:
@@ -38,7 +38,6 @@ function renderShoppingList() {
 // Join together the individual item strings into one long string
 // Insert the <li>s string inside the .js-shopping-list <ul> in the DOM.
     
-    console.log('`renderShoppingList` ran');
   }
   
  
@@ -50,7 +49,13 @@ function renderShoppingList() {
     //add it as a new object name in STORE with default checked value: false
 
     //invoke renderShoppingList()
-    console.log('`handleNewItemSubmit` ran');
+
+            $('form').on('submit','button', event =>{
+                const itemName = $('js-shopping-list-entry').val();
+             })
+
+           STORE.push({ name: itemName, checked: false });
+                console.log('`handleNewItemSubmit` ran');
   }
   
   
