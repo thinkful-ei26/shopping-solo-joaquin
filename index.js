@@ -48,14 +48,14 @@ function renderShoppingList() {
   $(".js-shopping-list").html(shoppingListItemString);
 }
 
-function addItemToShoppingList(item) {
-  STORE.push({ name: item, checked: false });
+function addItemToShoppingList(item) {    
+  STORE.push({ name: item, checked: false }); //mutates global STORE.
   
 }
 
 function handleNewItemsSubmit() {
   // This function handles new items added by user.
-  // 1.Listen for when a new item is added
+  // 1.Listen for when a new item is added 
   // 2.Get the name of the new item.
   // 3.Push the new item to the STORE
   // 4.Clear out the input field.
@@ -71,8 +71,29 @@ function handleNewItemsSubmit() {
   console.log("handleNewItems... ran");
 }
 
-function handleItemsCheckClicked() {
+function toggleCheckedListItem(index){
+  STORE[index].checked = !STORE[index].checked;
+}
+
+function getItemIndexFromElement(item){
+ const itemIndexString = $(item).closest('.js-item-index-element').attr('data-item-index');
+ return parseInt(itemIndexString, 10);
+}
+
+function handleItemCheckClicked() {
   // This function handles when user checks items as complete.
+  // Listen for when user checks an item as complete 'js-item-toggle', with event delegation.
+  // Find that item in STORE, retrieve it's index from the data attribute.
+  // Change that items 'checked' status to call a css strikethrough style.
+  // Re-render the page to implement the new style
+  $('.js-shopping-list').on('click', '.js-item-toggle', event =>{ 
+    const itemIndex = getItemIndexFromElement(event.currentTarget);
+    toggleCheckedListItem(itemIndex);
+    renderShoppingList(); 
+    console.log(itemIndex);
+  });
+
+
   //   console.log("Items checked hanga banga ...");
 }
 
@@ -85,7 +106,7 @@ function handleShoppingList() {
   // Callback function to run everything.
   renderShoppingList();
   handleNewItemsSubmit();
-  handleItemsCheckClicked();
+  handleItemCheckClicked();
   handleDeleteItemClicked();
 }
 
