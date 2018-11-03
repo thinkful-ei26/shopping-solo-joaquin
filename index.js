@@ -79,7 +79,7 @@ function handleNewItemsSubmit() {
 }
 
 function toggleCheckedListItem(index) {
-  STORE[index].checked = !STORE[index].checked;
+  STORE.itemList[index].checked = !STORE.itemList[index].checked;
 }
 
 function getItemIndexFromElement(item) {
@@ -104,7 +104,7 @@ function handleItemCheckClicked() {
   //   console.log("Items checked hanga banga ...");
 }
 function deleteCheckedListItem(index) {
-  STORE.splice(index,1);
+  STORE.itemList.splice(index,1);
 
 }
 function handleDeleteItemClicked() {
