@@ -48,6 +48,11 @@ function renderShoppingList() {
   $(".js-shopping-list").html(shoppingListItemString);
 }
 
+function addItemToShoppingList(item) {
+  STORE.push({ name: item, checked: false });
+  
+}
+
 function handleNewItemsSubmit() {
   // This function handles new items added by user.
   // 1.Listen for when a new item is added
@@ -59,9 +64,10 @@ function handleNewItemsSubmit() {
     event.preventDefault();
     const newItemAdded = $(".js-shopping-list-entry").val();
     $(".js-shopping-list-entry").val(" ");
-    STORE.push({ name: newItemAdded, checked: false });
+    addItemToShoppingList(newItemAdded);
+    renderShoppingList();  
   });
-  // renderShoppingList();
+  
   console.log("handleNewItems... ran");
 }
 
