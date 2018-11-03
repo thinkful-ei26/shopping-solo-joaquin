@@ -55,18 +55,14 @@ function handleNewItemsSubmit() {
   // 3.Push the new item to the STORE
   // 4.Clear out the input field.
   // 5.Re-render the page.
-    $('#js-shopping-list-form').submit(function(event) {
+  $("#js-shopping-list-form").submit(function(event) {
     event.preventDefault();
-    console.log('`handleNewItemSubmit` ran');
-});
-//     const addItem = event.name;
-// });
-// $('input').val(' ');
-// STORE.push({this.name: name, checked: false})
-
-
-//   renderShoppingList();
-  //   console.log("handleNewItems... ran");
+    const newItemAdded = $(".js-shopping-list-entry").val();
+    $(".js-shopping-list-entry").val(" ");
+    STORE.push({ name: newItemAdded, checked: false });
+  });
+  // renderShoppingList();
+  console.log("handleNewItems... ran");
 }
 
 function handleItemsCheckClicked() {
