@@ -1,3 +1,5 @@
+/*eslint-env jquery*/
+'use strict';
 // Render display with placeholder elements on page load.
 // Provide an input to add items.
 // Create a STORE object to store all data.
@@ -6,14 +8,19 @@
 // When item marked as completed, update STORE.
 // Invoke the rendering function each time STORE is affected.
 // When STORE is updated with a new item, generate new html to displayed.
-const STORE = [
+const STORE = {
+  itemList: [
   { name: "apples", checked: false },
   { name: "oranges", checked: false },
   { name: "milk", checked: true },
   { name: "bread", checked: false }
-];
+],
 
-function generateItemElement(item, itemIndex, template) {
+hideCheckedItems: false,
+searchThisItem: false,
+};
+
+function generateItemElement(item, itemIndex, template) {    //what is the 'template' argument for?
   // Receives an item  and itemIndex from generateShopingItemsString.
   // Generate an html structure for each individual item .
   return `
@@ -44,12 +51,14 @@ function generateShoppingItemsString(shoppingList) {
 function renderShoppingList() {
   //  Passes data to generateShoppingItemsString.
   //  Put the string into the .js-shopping-list class ul below the form.
-  const shoppingListItemString = generateShoppingItemsString(STORE);
+  const shoppingListItemString = generateShoppingItemsString(STORE.itemList);
+  console.log('rendering page');
   $(".js-shopping-list").html(shoppingListItemString);
 }
 
 function addItemToShoppingList(item) {
-  STORE.push({ name: item, checked: false }); //mutates global STORE.
+  STORE.itemList.push({ name: item, checked: false }); //mutates global STORE.
+  console.log('addItemToShoppingList');
 }
 
 function handleNewItemsSubmit() {
@@ -115,12 +124,26 @@ function checkedItemDisplay(){
   // Provide a button to show checked items 'Show checked items?'
   // Listen on that button (no delegation), for clicks.
   // If clicked re-render the page without checked items.
-  //    addClass .hidden to those elements.
-  //  Use 
+  //    Somehow, assign a class of .hidden to checked items.
+  //    addClass would work
+  //    find those items by index and attribute 'checked'
+  //    maybe run a filter on STORE that finds items by index and if checked, apply class.
   $('.js-display-checked-items').click(function(event){
+    STORE.hideCompleted = !STORE.hideCompleted;
+
   console.log('checked item function');
 });
 };
+
+
+function searchBox(){
+  // Provide a search box.
+  // Filter the rendered STORE on search items.
+}
+
+function editItemName(){
+  // Provide a way to change item names.
+}
 
 function handleShoppingList() {
   // Callback function to run everything.
