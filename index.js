@@ -67,7 +67,6 @@ function handleNewItemsSubmit() {
     renderShoppingList();
   });
 
-  console.log("handleNewItems... ran");
 }
 
 function toggleCheckedListItem(index) {
@@ -91,7 +90,6 @@ function handleItemCheckClicked() {
     const itemIndex = getItemIndexFromElement(event.currentTarget);
     toggleCheckedListItem(itemIndex);
     renderShoppingList();
-    console.log(itemIndex);
   });
 
   //   console.log("Items checked hanga banga ...");
@@ -108,12 +106,21 @@ function handleDeleteItemClicked() {
   // Re-render page.
   $('.js-shopping-list').on('click', '.js-item-delete', event =>{
     const itemIndex = getItemIndexFromElement(event.currentTarget);
-    // console.log(' delete function running');
     deleteCheckedListItem(itemIndex);
     renderShoppingList();
   });
-  //   console.log("Items delete...");
 }
+
+function checkedItemDisplay(){
+  // Provide a button to show checked items 'Show checked items?'
+  // Listen on that button (no delegation), for clicks.
+  // If clicked re-render the page without checked items.
+  //    addClass .hidden to those elements.
+  //  Use 
+  $('.js-display-checked-items').click(function(event){
+  console.log('checked item function');
+});
+};
 
 function handleShoppingList() {
   // Callback function to run everything.
@@ -121,6 +128,7 @@ function handleShoppingList() {
   handleNewItemsSubmit();
   handleItemCheckClicked();
   handleDeleteItemClicked();
+  checkedItemDisplay();
 }
 
 $(handleShoppingList);
