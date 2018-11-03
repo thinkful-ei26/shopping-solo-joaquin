@@ -48,14 +48,13 @@ function renderShoppingList() {
   $(".js-shopping-list").html(shoppingListItemString);
 }
 
-function addItemToShoppingList(item) {    
+function addItemToShoppingList(item) {
   STORE.push({ name: item, checked: false }); //mutates global STORE.
-  
 }
 
 function handleNewItemsSubmit() {
   // This function handles new items added by user.
-  // 1.Listen for when a new item is added 
+  // 1.Listen for when a new item is added
   // 2.Get the name of the new item.
   // 3.Push the new item to the STORE
   // 4.Clear out the input field.
@@ -65,19 +64,21 @@ function handleNewItemsSubmit() {
     const newItemAdded = $(".js-shopping-list-entry").val();
     $(".js-shopping-list-entry").val(" ");
     addItemToShoppingList(newItemAdded);
-    renderShoppingList();  
+    renderShoppingList();
   });
-  
+
   console.log("handleNewItems... ran");
 }
 
-function toggleCheckedListItem(index){
+function toggleCheckedListItem(index) {
   STORE[index].checked = !STORE[index].checked;
 }
 
-function getItemIndexFromElement(item){
- const itemIndexString = $(item).closest('.js-item-index-element').attr('data-item-index');
- return parseInt(itemIndexString, 10);
+function getItemIndexFromElement(item) {
+  const itemIndexString = $(item)
+    .closest(".js-item-index-element")
+    .attr("data-item-index");
+  return parseInt(itemIndexString, 10);
 }
 
 function handleItemCheckClicked() {
@@ -86,19 +87,31 @@ function handleItemCheckClicked() {
   // Find that item in STORE, retrieve it's index from the data attribute.
   // Change that items 'checked' status to call a css strikethrough style.
   // Re-render the page to implement the new style
-  $('.js-shopping-list').on('click', '.js-item-toggle', event =>{ 
+  $(".js-shopping-list").on("click", ".js-item-toggle", event => {
     const itemIndex = getItemIndexFromElement(event.currentTarget);
     toggleCheckedListItem(itemIndex);
-    renderShoppingList(); 
+    renderShoppingList();
     console.log(itemIndex);
   });
 
-
   //   console.log("Items checked hanga banga ...");
 }
+function deleteCheckedListItem(index) {
+  STORE.splice(index,1);
 
+}
 function handleDeleteItemClicked() {
   // Handles when user clicks 'delete' button.
+  // Listen on .js-shopping-list for when user clicks a delete button on .js-item-delete using event delegation.
+  // Find that item in STORE, retrieve it's index from the data attribute (re-use getItemIndexFromElement for this).
+  // Remove that item from STORE, in an outside function deleteCheckedListItem().
+  // Re-render page.
+  $('.js-shopping-list').on('click', '.js-item-delete', event =>{
+    const itemIndex = getItemIndexFromElement(event.currentTarget);
+    // console.log(' delete function running');
+    deleteCheckedListItem(itemIndex);
+    renderShoppingList();
+  });
   //   console.log("Items delete...");
 }
 
