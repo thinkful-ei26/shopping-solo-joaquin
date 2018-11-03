@@ -16,9 +16,11 @@ const STORE = [
 function generateItemElement(item, itemIndex, template) {
   // Receives an item  and itemIndex from generateShopingItemsString.
   // Generate an html structure for each individual item .
-   return `
+  return `
     <li class="js-item-index-element" data-item-index="${itemIndex}">
-      <span class="shopping-item js-shopping-item ${item.checked ? "shopping-item__checked" : ''}">${item.name}</span>
+      <span class="shopping-item js-shopping-item ${
+        item.checked ? "shopping-item__checked" : ""
+      }">${item.name}</span>
       <div class="shopping-item-controls">
         <button class="shopping-item-toggle js-item-toggle">
             <span class="button-label">check</span>
@@ -28,13 +30,13 @@ function generateItemElement(item, itemIndex, template) {
         </button>
       </div>
     </li>`;
-  console.log("generateItemElement");
 }
 
 function generateShoppingItemsString(shoppingList) {
   //  Receive a list from the render function, maps over it to generate items and itemIndex, then calls generateItemElements and passes item and itemIndex to it.
   const items = shoppingList.map((item, index) =>
-    generateItemElement(item, index));
+    generateItemElement(item, index)
+  );
 
   return items.join();
 }
@@ -44,23 +46,37 @@ function renderShoppingList() {
   //  Put the string into the .js-shopping-list class ul below the form.
   const shoppingListItemString = generateShoppingItemsString(STORE);
   $(".js-shopping-list").html(shoppingListItemString);
-
-  console.log("renderShoppingList ran");
 }
 
 function handleNewItemsSubmit() {
   // This function handles new items added by user.
-//   console.log("handleNewItems... ran");
+  // 1.Listen for when a new item is added
+  // 2.Get the name of the new item.
+  // 3.Push the new item to the STORE
+  // 4.Clear out the input field.
+  // 5.Re-render the page.
+    $('#js-shopping-list-form').submit(function(event) {
+    event.preventDefault();
+    console.log('`handleNewItemSubmit` ran');
+});
+//     const addItem = event.name;
+// });
+// $('input').val(' ');
+// STORE.push({this.name: name, checked: false})
+
+
+//   renderShoppingList();
+  //   console.log("handleNewItems... ran");
 }
 
 function handleItemsCheckClicked() {
   // This function handles when user checks items as complete.
-//   console.log("Items checked hanga banga ...");
+  //   console.log("Items checked hanga banga ...");
 }
 
 function handleDeleteItemClicked() {
   // Handles when user clicks 'delete' button.
-//   console.log("Items delete...");
+  //   console.log("Items delete...");
 }
 
 function handleShoppingList() {
