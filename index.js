@@ -13,45 +13,54 @@ const STORE = [
   { name: "bread", checked: false }
 ];
 
+function generateItemElement(item, itemIndex, template) {
+  // Receives an item  and itemIndex from generateShopingItemsString.
+  // Generate an html structure for each individual item .
+   return `
+    <li class="js-item-index-element" data-item-index="${itemIndex}">
+      <span class="shopping-item js-shopping-item ${item.checked ? "shopping-item__checked" : ''}">${item.name}</span>
+      <div class="shopping-item-controls">
+        <button class="shopping-item-toggle js-item-toggle">
+            <span class="button-label">check</span>
+        </button>
+        <button class="shopping-item-delete js-item-delete">
+            <span class="button-label">delete</span>
+        </button>
+      </div>
+    </li>`;
+  console.log("generateItemElement");
+}
+
+function generateShoppingItemsString(shoppingList) {
+  //  Receive a list from the render function, maps over it to generate items and itemIndex, then calls generateItemElements and passes item and itemIndex to it.
+  const items = shoppingList.map((item, index) =>
+    generateItemElement(item, index));
+
+  return items.join();
+}
+
 function renderShoppingList() {
-  //  Get string from generateShoppingItemString().
+  //  Passes data to generateShoppingItemsString.
   //  Put the string into the .js-shopping-list class ul below the form.
-  const shoppingListItemString = generateShoppingItemString();
+  const shoppingListItemString = generateShoppingItemsString(STORE);
   $(".js-shopping-list").html(shoppingListItemString);
 
   console.log("renderShoppingList ran");
 }
-function generateItemElement(shoppingList){
-    // Generate an html structure for each individual item in STORE and pass the string to generateShoppingItemString. Receive a
-    return 
-    
-}
-
-function generateShoppingItemString() {
-  // 1. Generate a string of<li> elements from the STORE with item name is as inner html, their index in the SOURCE as an attribute, and whether or not the item is checked.
-  return STORE.map((name, index) => {
-    return this.name, this.index;
-  });
-
-  //             <li> Apples</li>
-  //             <li> Oranges </li>
-  //             <li> Mile </li>
-  //             <li> Bird food </li>`;
-}
 
 function handleNewItemsSubmit() {
   // This function handles new items added by user.
-  console.log("handleNewItems... ran");
+//   console.log("handleNewItems... ran");
 }
 
 function handleItemsCheckClicked() {
   // This function handles when user checks items as complete.
-  console.log("Items checked ...");
+//   console.log("Items checked hanga banga ...");
 }
 
 function handleDeleteItemClicked() {
   // Handles when user clicks 'delete' button.
-  console.log("Items delete...");
+//   console.log("Items delete...");
 }
 
 function handleShoppingList() {
